@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myfirstlove/src/domain/utils/Resource.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/bloc/LoginBloc.dart';
+import 'package:myfirstlove/src/routing/app_router.dart';
 import 'bloc/LoginState.dart';
 import 'LoginContent.dart';
 
@@ -43,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             // 👉 Navegar a dashboard cuando login es correcto
             Navigator.pushNamedAndRemoveUntil(
               context,
-              '/dashboard',
+              AppRoutes.dashboard,
               (route) => false,
             );
           }

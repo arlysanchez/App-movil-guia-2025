@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myfirstlove/src/constants/app_colors.dart';
-import 'package:myfirstlove/src/features/auth/presentation/screens/login/LoginContent.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/LoginPage.dart';
-import 'package:myfirstlove/src/features/auth/presentation/screens/register/register_screen.dart';
+import 'package:myfirstlove/src/features/auth/presentation/screens/register/RegisterPage.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:myfirstlove/src/features/blocProvider.dart';
 import 'package:myfirstlove/src/features/dashboard/presentation/screens/dashboard_screen.dart';
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
       routes: {
       AppRoutes.welcome:(context) => const WelcomeScreen(),
       AppRoutes.login :(context) => const LoginPage(),
-      AppRoutes.register :(context) => const RegisterScreen(),
+      AppRoutes.register :(context) => const RegisterPage(),
       AppRoutes.dashboard :(context) => const DashboardScreen(),
 
       },
