@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myfirstlove/injection.dart';
 import 'package:myfirstlove/src/constants/app_colors.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/LoginPage.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/register/RegisterPage.dart';
@@ -8,7 +9,9 @@ import 'package:myfirstlove/src/features/blocProvider.dart';
 import 'package:myfirstlove/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:myfirstlove/src/routing/app_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MyApp());
 }
 

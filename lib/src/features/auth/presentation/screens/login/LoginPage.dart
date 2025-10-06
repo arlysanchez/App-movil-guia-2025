@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:myfirstlove/src/domain/models/AuthResponse.dart';
 import 'package:myfirstlove/src/domain/utils/Resource.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/bloc/LoginBloc.dart';
 import 'package:myfirstlove/src/routing/app_router.dart';
@@ -37,11 +38,12 @@ class _LoginPageState extends State<LoginPage> {
               toastLength: Toast.LENGTH_LONG,
             );
           } else if (responseState is Success) {
-            Fluttertoast.showToast(
-              msg: responseState.data.toString(),
-              toastLength: Toast.LENGTH_LONG,
-            );
+            final authResponse = responseState.data as AuthResponse; 
+              Fluttertoast.showToast(
+              msg: 'Login exitoso', toastLength: Toast.LENGTH_LONG);
+              print('Usuario en sesion: ${authResponse?.toJson()}');
             // 👉 Navegar a dashboard cuando login es correcto
+
             Navigator.pushNamedAndRemoveUntil(
               context,
               AppRoutes.dashboard,

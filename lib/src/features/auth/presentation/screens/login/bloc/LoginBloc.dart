@@ -1,13 +1,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myfirstlove/src/domain/useCase/Auth/AuthUseCases.dart';
 import 'package:myfirstlove/src/domain/utils/Resource.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/bloc/LoginEvent.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/bloc/LoginState.dart';
 import 'package:myfirstlove/src/features/utils/BlocFormItem.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginState(formKey: GlobalKey<FormState>(), response: Initial())) {
+AuthUseCases authUseCases;
+
+
+  LoginBloc(this.authUseCases) : super(LoginState()) {
     on<LoginInit>(_onInit);
     on<LoginEmailChanged>(_onEmailChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
@@ -41,30 +45,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> _onSubmitted(LoginSubmitted event, Emitter<LoginState> emit) async {
-    // Validación final
-    final email = state.email.value.trim();
-    final password = state.password.value.trim();
-
-    final emailError = email.isEmpty ? 'Ingresa el email' : null;
-    final passwordError = password.isEmpty || password.length < 6
-        ? 'Ingresa el password (mínimo 6 caracteres)'
-        : null;
-
-    emit(state.copyWith(
-      email: state.email.copyWith(error: emailError),
-      password: state.password.copyWith(error: passwordError),
-    ));
-
-    if (emailError != null || passwordError != null) return;
-
-    // Simula login
-    emit(state.copyWith(response: Loading()));
-    await Future.delayed(const Duration(seconds: 2));
-
-    if (email == "admin@test.com" && password == "123456") {
-      emit(state.copyWith(response: Success("Bienvenido")));
-    } else {
-      emit(state.copyWith(response: Error("Credenciales incorrectas")));
-    }
+    emit(
+      state.copyWith(response: Loading(), formKey: formKey),
+    );
+    await Future.delayed(const Duration(seconds: 6));
+    Resource resource= 
+    await authUseCases.loginUseCase.run(state.email.value, state.password.value);
+    emit(state.copyWith(response: resource, formKey: formKey));
   }
 }
