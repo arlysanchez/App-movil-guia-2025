@@ -1,3 +1,4 @@
+import 'package:myfirstlove/src/data/dataSource/local/SharedPref.dart';
 import 'package:myfirstlove/src/data/dataSource/remote/service/AuthService.dart';
 import 'package:myfirstlove/src/domain/models/AuthResponse.dart';
 import 'package:myfirstlove/src/domain/models/User.dart';
@@ -6,12 +7,17 @@ import 'package:myfirstlove/src/domain/utils/Resource.dart';
 
 class AuthRepositoryImpl implements AuthRepository{
   AuthService authService;
-  AuthRepositoryImpl(this.authService);
+  SharedPref sharedPref;
+  AuthRepositoryImpl(this.authService, this.sharedPref);
   
   @override
-  Future<AuthResponse?> getUserSession() {
-    // TODO: implement getUserSession
-    throw UnimplementedError();
+  Future<AuthResponse?> getUserSession() async{
+    final data = await sharedPref.read('user');
+    if(data !=null){
+      AuthResponse authResponse = AuthResponse.fromJson(data);
+      return authResponse;
+    }
+    return null;
   }
 
   @override
@@ -20,9 +26,8 @@ class AuthRepositoryImpl implements AuthRepository{
   }
 
   @override
-  Future<bool?> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<bool?> logout() async{
+    return await sharedPref.remove('user');
   }
 
   @override
@@ -31,9 +36,8 @@ class AuthRepositoryImpl implements AuthRepository{
   }
 
   @override
-  Future<void> saveUserSession(AuthResponse authResponse) {
-    // TODO: implement saveUserSession
-    throw UnimplementedError();
+  Future<void> saveUserSession(AuthResponse authResponse) async {
+    sharedPref.save('user', authResponse.toJson());
   }
 
 }

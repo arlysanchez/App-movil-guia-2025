@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:myfirstlove/src/domain/models/AuthResponse.dart';
 import 'package:myfirstlove/src/features/utils/BlocFormItem.dart';
 
 abstract class LoginEvent extends Equatable {
@@ -28,3 +29,15 @@ class LoginPasswordChanged extends LoginEvent {
 class LoginSubmitted extends LoginEvent {
   const LoginSubmitted();
 }
+class LoginFormReset extends LoginEvent {
+  const LoginFormReset();
+}
+
+class LoginSaveUserSession extends LoginEvent{
+  final AuthResponse authResponse;
+  const LoginSaveUserSession({required this.authResponse});
+  @override
+  List<Object?> get props => [authResponse];
+
+}
+

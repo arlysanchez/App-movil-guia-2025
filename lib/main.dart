@@ -6,7 +6,7 @@ import 'package:myfirstlove/src/features/auth/presentation/screens/login/LoginPa
 import 'package:myfirstlove/src/features/auth/presentation/screens/register/RegisterPage.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:myfirstlove/src/features/blocProvider.dart';
-import 'package:myfirstlove/src/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:myfirstlove/src/features/dashboard/presentation/screens/home/HomePage.dart';
 import 'package:myfirstlove/src/routing/app_router.dart';
 
 void main() async {
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       AppRoutes.welcome:(context) => const WelcomeScreen(),
       AppRoutes.login :(context) => const LoginPage(),
       AppRoutes.register :(context) => const RegisterPage(),
-      AppRoutes.dashboard :(context) => const DashboardScreen(),
+      AppRoutes.dashboard :(context) => const HomePage(),
 
       },
     ),

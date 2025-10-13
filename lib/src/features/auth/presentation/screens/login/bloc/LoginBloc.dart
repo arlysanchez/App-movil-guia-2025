@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myfirstlove/src/domain/models/AuthResponse.dart';
 import 'package:myfirstlove/src/domain/useCase/Auth/AuthUseCases.dart';
 import 'package:myfirstlove/src/domain/utils/Resource.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/bloc/LoginEvent.dart';
@@ -16,11 +17,21 @@ AuthUseCases authUseCases;
     on<LoginEmailChanged>(_onEmailChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmitted>(_onSubmitted);
+
+    on<LoginFormReset>(_onLoginFormReset);
+    on<LoginSaveUserSession>(_onSaveUserSession);
   }
   final formKey = GlobalKey<FormState>();
 
   void _onInit(LoginInit event, Emitter<LoginState> emit) async {
-    emit(LoginState(formKey: formKey, response: Initial()));
+   AuthResponse? authResponse = await authUseCases.getUserSessionUseCase.run();
+   emit(state.copyWith(formKey:formKey));
+   print('Usuario en sesion: ${authResponse?.toJson()}');
+   if (authResponse != null) {
+      emit(state.copyWith(response: Success(authResponse),//user y el token
+       formKey: formKey));
+   }
+
   }
 
  Future<void> _onEmailChanged(
@@ -53,4 +64,13 @@ AuthUseCases authUseCases;
     await authUseCases.loginUseCase.run(state.email.value, state.password.value);
     emit(state.copyWith(response: resource, formKey: formKey));
   }
+
+  Future<void> _onLoginFormReset( LoginFormReset event, Emitter<LoginState> emit) async {
+       state.formKey?.currentState?.reset();
+  }
+
+  Future<void> _onSaveUserSession(LoginSaveUserSession event, Emitter<LoginState> emit) async {
+    await authUseCases.saveUserSessionUseCase.run(event.authResponse);
+  }
+
 }

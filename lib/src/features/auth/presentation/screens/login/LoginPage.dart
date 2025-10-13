@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myfirstlove/src/domain/models/AuthResponse.dart';
 import 'package:myfirstlove/src/domain/utils/Resource.dart';
 import 'package:myfirstlove/src/features/auth/presentation/screens/login/bloc/LoginBloc.dart';
+import 'package:myfirstlove/src/features/auth/presentation/screens/login/bloc/LoginEvent.dart';
 import 'package:myfirstlove/src/routing/app_router.dart';
 import 'bloc/LoginState.dart';
 import 'LoginContent.dart';
@@ -38,7 +39,8 @@ class _LoginPageState extends State<LoginPage> {
               toastLength: Toast.LENGTH_LONG,
             );
           } else if (responseState is Success) {
-            final authResponse = responseState.data as AuthResponse; 
+            final authResponse = responseState.data as AuthResponse;
+             _bloc?.add(LoginSaveUserSession(authResponse: authResponse));
               Fluttertoast.showToast(
               msg: 'Login exitoso', toastLength: Toast.LENGTH_LONG);
               print('Usuario en sesion: ${authResponse?.toJson()}');

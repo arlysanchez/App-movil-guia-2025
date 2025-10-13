@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:myfirstlove/src/data/dataSource/local/SharedPref.dart' as _i920;
 import 'package:myfirstlove/src/data/dataSource/remote/service/AuthService.dart'
     as _i45;
 import 'package:myfirstlove/src/di/AppModule.dart' as _i691;
@@ -25,6 +26,8 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final appModule = _$AppModule();
+    gh.factory<_i920.SharedPref>(() => appModule.sharedPref);
+    gh.factoryAsync<String>(() => appModule.token);
     gh.factory<_i45.AuthService>(() => appModule.authService);
     gh.factory<_i496.AuthRepository>(() => appModule.authRepository);
     gh.factory<_i584.AuthUseCases>(() => appModule.authUseCases);
