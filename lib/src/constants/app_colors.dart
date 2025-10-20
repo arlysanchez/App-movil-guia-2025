@@ -5,7 +5,9 @@ class AppColors {
   AppColors._();
 
   // --- Colores Principales ---
-static const Color primary = Color(0xFF003366); // Azul oscuro
+static const Color primary = Color(0xFF003366);
+static const Color primary_admin = Color(0xFF000000); // Azul oscuro
+ // Azul oscuro
 static const Color accent = Color(0xFFF8A900);  // Amarillo/Naranja brillante
 
 // --- Colores de Branding (ajustados a la nueva combinación) ---

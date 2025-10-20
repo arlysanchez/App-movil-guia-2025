@@ -45,12 +45,29 @@ class _LoginPageState extends State<LoginPage> {
               msg: 'Login exitoso', toastLength: Toast.LENGTH_LONG);
               print('Usuario en sesion: ${authResponse?.toJson()}');
             // 👉 Navegar a dashboard cuando login es correcto
+             if(authResponse.user.roles != null){
+              final roles = authResponse.user.roles!;
+             if(roles.length ==1){
+                final role = roles.first;
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  Navigator.pushNamedAndRemoveUntil(
+                        context,
+                      AppRoutes.homeClient, 
+                      (route) => false);
+                });
+              }else{
+                 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.role, 
+                    (route) =>
+                        false); //enviar a la pagina de roles, despues de guardar el usuario
+              }); 
 
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              AppRoutes.dashboard,
-              (route) => false,
-            );
+             }
+
+             }
+           
           }
         },
         child: BlocBuilder<LoginBloc, LoginState>(

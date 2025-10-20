@@ -56,6 +56,10 @@ class User {
       if(id != null){
         data["id"] = id;
       }
+       data["roles"] = roles != null
+      ? List<dynamic>.from(roles!.map((x) => x.toJson()))
+      : [];
+      
       return data;
 
     }

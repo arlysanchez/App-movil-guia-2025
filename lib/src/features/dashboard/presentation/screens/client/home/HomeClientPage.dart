@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myfirstlove/src/constants/app_colors.dart';
-import 'package:myfirstlove/src/features/dashboard/presentation/screens/home/bloc/HomeBloc.dart';
-import 'package:myfirstlove/src/features/dashboard/presentation/screens/home/bloc/HomeEvent.dart';
-import 'package:myfirstlove/src/features/dashboard/presentation/screens/home/bloc/HomeState.dart';
+import 'package:myfirstlove/src/features/dashboard/presentation/screens/client/home/bloc/HomeClientBloc.dart';
+import 'package:myfirstlove/src/features/dashboard/presentation/screens/client/home/bloc/HomeClientEvent.dart';
+import 'package:myfirstlove/src/features/dashboard/presentation/screens/client/home/bloc/HomeClientState.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeClientPage extends StatefulWidget {
+  const HomeClientPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _HomeClientPageState();
 
 }
 
-class _HomePageState extends State<HomePage> {
-  late HomeBloc _bloc; 
+class _HomeClientPageState extends State<HomeClientPage> {
+  late HomeClientBloc _bloc; 
 
   List<Widget> _pages = const [
     Text('Pantalla de inicio'),
@@ -33,12 +33,12 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _bloc = BlocProvider.of<HomeBloc>(context); // ✅ Safe
+    _bloc = BlocProvider.of<HomeClientBloc>(context); // ✅ Safe
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocBuilder<HomeClientBloc, HomeClientState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(

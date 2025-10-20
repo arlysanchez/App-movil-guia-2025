@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myfirstlove/src/domain/useCase/Auth/AuthUseCases.dart';
-import 'package:myfirstlove/src/features/dashboard/presentation/screens/home/bloc/HomeEvent.dart';
-import 'package:myfirstlove/src/features/dashboard/presentation/screens/home/bloc/HomeState.dart';
+import 'package:myfirstlove/src/features/dashboard/presentation/screens/admin/home/bloc/HomeEvent.dart';
+import 'package:myfirstlove/src/features/dashboard/presentation/screens/admin/home/bloc/HomeState.dart';
 
 class HomeBloc extends Bloc<HomeEvent,HomeState>{
 AuthUseCases authUseCases;
