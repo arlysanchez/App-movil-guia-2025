@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myfirstlove/src/constants/app_colors.dart';
+import 'package:myfirstlove/src/features/dashboard/presentation/screens/admin/amenities/list/AdminAmenitiesListPage.dart';
 import 'package:myfirstlove/src/features/dashboard/presentation/screens/admin/home/bloc/HomeBloc.dart';
 import 'package:myfirstlove/src/features/dashboard/presentation/screens/admin/home/bloc/HomeEvent.dart';
 import 'package:myfirstlove/src/features/dashboard/presentation/screens/admin/home/bloc/HomeState.dart';
@@ -16,16 +17,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late HomeBloc _bloc; 
 
-  List<Widget> _pages = const [
+  List<Widget> _pages = <Widget> [
     Text('Pantalla de inicio'),
-    Text('Pantalla de productos'),
+    AdminAmenitiesListPage(),
     Text('Pantalla de Mis ventas'),
     Text('Pantalla de Mis Ajustes'),
   ];
 
   final Map<int, String> _pageTitles = {
     0: 'Hola Jhan Arly Admin!',
-    1: 'Mis Productos',
+    1: 'Mis Amenities',
     2: 'Mis Ventas',
     3: 'Configuración',
   };
@@ -77,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   leading: const Icon(Icons.share),
-                  title: const Text('Productos'),
+                  title: const Text('Amenities'),
                   selected: state.pageIndex == 1,
                   onTap: () {
                     _bloc.add(const ChangeDrawerPage(pageIndex: 1));
@@ -126,7 +127,7 @@ class _HomePageState extends State<HomePage> {
             unselectedItemColor: Colors.grey,
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
-              BottomNavigationBarItem(icon: Icon(Icons.share), label: 'Productos'),
+              BottomNavigationBarItem(icon: Icon(Icons.share), label: 'Amenities'),
               BottomNavigationBarItem(icon: Icon(Icons.sell), label: 'Ventas'),
               BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Config'),
             ],

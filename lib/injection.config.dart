@@ -12,10 +12,16 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:myfirstlove/src/data/dataSource/local/SharedPref.dart' as _i920;
+import 'package:myfirstlove/src/data/dataSource/remote/service/AmenitiesService.dart'
+    as _i217;
 import 'package:myfirstlove/src/data/dataSource/remote/service/AuthService.dart'
     as _i45;
 import 'package:myfirstlove/src/di/AppModule.dart' as _i691;
+import 'package:myfirstlove/src/domain/repository/AmenitiesRepository.dart'
+    as _i589;
 import 'package:myfirstlove/src/domain/repository/AuthRepository.dart' as _i496;
+import 'package:myfirstlove/src/domain/useCase/Amenities/AmenitiesUseCases.dart'
+    as _i292;
 import 'package:myfirstlove/src/domain/useCase/Auth/AuthUseCases.dart' as _i584;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -29,8 +35,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i920.SharedPref>(() => appModule.sharedPref);
     gh.factoryAsync<String>(() => appModule.token);
     gh.factory<_i45.AuthService>(() => appModule.authService);
+    gh.factory<_i217.AmenitiesService>(() => appModule.amenitiesService);
     gh.factory<_i496.AuthRepository>(() => appModule.authRepository);
+    gh.factory<_i589.AmenitiesRepository>(() => appModule.amenitiesRepository);
     gh.factory<_i584.AuthUseCases>(() => appModule.authUseCases);
+    gh.factory<_i292.AmenitiesUseCases>(() => appModule.amenitiesUseCases);
     return this;
   }
 }
