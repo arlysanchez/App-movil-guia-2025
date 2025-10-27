@@ -16,8 +16,7 @@ class AmenitiesRepositoryimpl implements AmenitiesRepository {
 
   @override
   Future<Resource<bool>> delete(int id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+   return amenitiesService.delete(id);
   }
 
   @override

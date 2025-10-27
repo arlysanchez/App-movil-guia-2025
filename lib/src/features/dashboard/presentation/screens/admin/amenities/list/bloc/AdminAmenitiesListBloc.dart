@@ -28,7 +28,7 @@ class AdminAmenitiesListBloc
       DeleteAmenity event, Emitter<AdminAmenitiesListState> emit) async {
     emit(state.copyWith(response: Loading()));
     // Llama al caso de uso para eliminar una comodidad
-    //Resource response = await amenitiesUseCases.delete.run(event.id);
-   // emit(state.copyWith(response: response));
+    Resource response = await amenitiesUseCases.deleteAmenities.run(event.id);
+    emit(state.copyWith(response: response));
   }
 }

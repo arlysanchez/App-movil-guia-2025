@@ -9,6 +9,7 @@ import 'package:myfirstlove/src/domain/models/AuthResponse.dart';
 import 'package:myfirstlove/src/domain/repository/AmenitiesRepository.dart';
 import 'package:myfirstlove/src/domain/repository/AuthRepository.dart';
 import 'package:myfirstlove/src/domain/useCase/Amenities/AmenitiesUseCases.dart';
+import 'package:myfirstlove/src/domain/useCase/Amenities/DeleteAmenitiesUseCase.dart';
 import 'package:myfirstlove/src/domain/useCase/Amenities/GetAmenitiesUseCase.dart';
 import 'package:myfirstlove/src/domain/useCase/Auth/AuthUseCases.dart';
 import 'package:myfirstlove/src/domain/useCase/Auth/GetUserSessionUseCase.dart';
@@ -63,7 +64,8 @@ abstract class AppModule {
 
   @injectable
   AmenitiesUseCases get amenitiesUseCases => AmenitiesUseCases(
-    getAmenities: GetAmenitiesUseCase(amenitiesRepository)
+    getAmenities: GetAmenitiesUseCase(amenitiesRepository),
+    deleteAmenities: DeleteAmenitiesUseCase(amenitiesRepository)
   );
 
 }

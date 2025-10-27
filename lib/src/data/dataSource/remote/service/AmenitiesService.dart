@@ -31,5 +31,30 @@ class AmenitiesService {
       print('Error en AmenitiesService getAmenities: $e');
       return Error(e.toString());
     }
-  } 
+  }
+//servicio para eliminar un amenities
+Future<Resource<bool>> delete(int id) async{
+  print('Eliminando amenity con id: $id');
+  try{
+     Uri url = Uri.http(ApiConfig.API_URL, '/amenities/$id');
+      Map<String, String> headers = {
+        "Content-Type": "application/json",
+        "Authorization": await token
+      };
+      final response = await http.delete(url, headers: headers);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Success(true);
+      } else {
+          final data = json.decode(response.body);
+        return Error(ListToString(data['message']));
+      }                      
+  }catch (e) {
+      print('Error en AmenitiesService getAmenities: $e');
+      return Error(e.toString());
+
+    }
+
+}
+
+
 }
